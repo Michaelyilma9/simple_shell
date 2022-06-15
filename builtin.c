@@ -1,9 +1,3 @@
-/*
- * File: builtin.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 int (*get_builtin(char *command))(char **args, char **front);
 int shellby_exit(char **args, char **front);
@@ -11,11 +5,11 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **front);
 int shellby_help(char **args, char __attribute__((__unused__)) **front);
 
 /**
- * get_builtin - Matches a command with a corresponding
+ * get_builtin - Matches a command with corresponding
  *               shellby builtin function.
  * @command: The command to match.
  *
- * Return: A function pointer to the corresponding builtin.
+ * Return: A function pointer  the corresponding builtin.
  */
 int (*get_builtin(char *command))(char **args, char **front)
 {
@@ -43,13 +37,13 @@ int (*get_builtin(char *command))(char **args, char **front)
  * shellby_exit - Causes normal process termination
  *                for the shellby shell.
  * @args: An array of arguments containing the exit value.
- * @front: A double pointer to the beginning of args.
+ * @front: A double pointer to beginning of args.
  *
  * Return: If there are no arguments - -3.
  *         If the given exit value is invalid - 2.
- *         O/w - exits with the given status value.
+ *         O/w - exits with given status value.
  *
- * Description: Upon returning -3, the program exits back in the main function.
+ * Description:
  */
 int shellby_exit(char **args, char **front)
 {
@@ -85,7 +79,7 @@ int shellby_exit(char **args, char **front)
 }
 
 /**
- * shellby_cd - Changes the current directory of the shellby process.
+ * shellby_cd - Changes the 
  * @args: An array of arguments.
  * @front: A double pointer to the beginning of args.
  *

@@ -1,9 +1,3 @@
-/*
- * File: builtin.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 int shellby_alias(char **args, char __attribute__((__unused__)) **front);
@@ -156,3 +150,4 @@ char **replace_aliases(char **args)
 
 	return (args);
 }
+

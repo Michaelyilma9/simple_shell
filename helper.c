@@ -1,9 +1,3 @@
-/*
- * File: helper.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 void free_args(char **args, char **front);

@@ -1,9 +1,3 @@
-/*
- * File: locate.c
- * Auth: Frank-Opigo Emmanuel
- *      Akemi Isreal
- */
-
 #include "shell.h"
 
 char *fill_path_dir(char *path);

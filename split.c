@@ -1,9 +1,3 @@
-/*
- * File: split.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 int token_len(char *str, char *delim);

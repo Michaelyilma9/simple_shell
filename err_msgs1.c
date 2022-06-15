@@ -1,9 +1,3 @@
-/*
- * File: err_msgs1.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 char *error_env(char **args);

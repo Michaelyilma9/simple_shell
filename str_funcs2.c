@@ -1,9 +1,3 @@
-/*
- * File: str_funcs2.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 char *_strchr(char *s, char c);

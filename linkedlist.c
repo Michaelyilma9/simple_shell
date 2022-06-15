@@ -1,9 +1,3 @@
-/*
- * File: linkedlist.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 alias_t *add_alias_end(alias_t **head, char *name, char *value);

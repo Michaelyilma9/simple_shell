@@ -1,9 +1,3 @@
-/*
- * File: environ.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 char **_copyenv(void);

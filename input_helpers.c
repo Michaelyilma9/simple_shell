@@ -1,9 +1,3 @@
-/*
- * File: input_helpers.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 char *get_args(char *line, int *exe_ret);

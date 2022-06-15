@@ -1,9 +1,3 @@
-/*
- * File: env_builtins.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 int shellby_env(char **args, char __attribute__((__unused__)) **front);

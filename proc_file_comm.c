@@ -1,9 +1,3 @@
-/*
- * File: proc_file_comm.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 int cant_open(char *file_path);
@@ -54,7 +48,7 @@ int cant_open(char *file_path)
  * @exe_ret: Return value of the last executed command.
  *
  * Return: If file couldn't be opened - 127.
- * 	   If malloc fails - -1.
+ *	   If malloc fails - -1.
  *	   Otherwise the return value of the last command ran.
  */
 int proc_file_commands(char *file_path, int *exe_ret)

@@ -1,9 +1,3 @@
-/*
- * File: err_msgs2.c
- * Auth: Frank-Opigo Emmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 char *error_126(char **args);

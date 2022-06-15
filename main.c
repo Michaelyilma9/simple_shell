@@ -1,9 +1,3 @@
-/*
- * File: main.c
- * Auth: Frank-Opigo Emmanuel
- *      Akemi Isreal
- */
-
 #include "shell.h"
 
 void sig_handler(int sig);

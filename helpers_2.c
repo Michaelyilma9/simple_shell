@@ -1,9 +1,3 @@
-/*
- * File: helpers_2.c
- * Auth: Frank-OpigoEmmanuel
- *       Akemi Isreal
- */
-
 #include "shell.h"
 
 void handle_line(char **line, ssize_t read);
