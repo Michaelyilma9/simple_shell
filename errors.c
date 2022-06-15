@@ -1,174 +1,121 @@
-#include "main.h"
-/**
- * _strcat_cd - strcat for cd error
- * @data: data struct
- * @command: command passed
- * @ms: message to print
- * @error: error message
- * @ver: counter lines
- * Return: error message
+/*
+ * File: errors.c
+ * Auth: Frank-Opigo Emmanuel
+ *       Akemi Isreal
  */
-char *_strcat_cd(store *data, char **command, char *ms, char *error, char *ver)
-{
-	char *flag;
 
-	_strcpy(error, data->callmemaybe);
-	_strcat(error, ": ");
-	_strcat(error, ver);
-	_strcat(error, ": ");
-	_strcat(error, command[0]);
-	_strcat(error, ms);
-	if (command[1][0] == '-')
+#include "shell.h"
+
+int num_len(int num);
+char *_itoa(int num);
+int create_error(char **args, int err);
+
+/**
+ * num_len - Counts the digit length of a number.
+ * @num: The number to measure.
+ *
+ * Return: The digit length.
+ */
+int num_len(int num)
+{
+	unsigned int num1;
+	int len = 1;
+
+	if (num < 0)
 	{
-		flag = malloc(sizeof(char) * 3);
-		flag[0] = '-';
-		flag[1] = command[1][1];
-		flag[2] = '\0';
-		_strcat(error, flag);
-		free(flag);
+		len++;
+		num1 = num * -1;
 	}
 	else
 	{
-		_strcat(error, command[1]);
+		num1 = num;
 	}
-	_strcat(error, "\n");
-	_strcat(error, "\0");
-	return (error);
-}
-/**
- * error_get_cd - error mesage for cd
- * @command: command passed
- * @data: struct store
- * Return: message
- */
-char *error_get_cd(char **command, store *data)
-{
-	int len, id;
-	char *error, *ver, *msg;
-
-	ver = _itoa(data->counter);
-	if (command[1][0] == '-')
+	while (num1 > 9)
 	{
-		msg = ": Illegal option ";
-		id = 2;
+		len++;
+		num1 /= 10;
+	}
+
+	return (len);
+}
+
+/**
+ * _itoa - Converts an integer to a string.
+ * @num: The integer.
+ *
+ * Return: The converted string.
+ */
+char *_itoa(int num)
+{
+	char *buffer;
+	int len = num_len(num);
+	unsigned int num1;
+
+	buffer = malloc(sizeof(char) * (len + 1));
+	if (!buffer)
+		return (NULL);
+
+	buffer[len] = '\0';
+
+	if (num < 0)
+	{
+		num1 = num * -1;
+		buffer[0] = '-';
 	}
 	else
 	{
-		msg = ": can't cd to ";
-		id = _strlen(command[1]);
+		num1 = num;
 	}
 
-	len = _strlen(data->callmemaybe) + _strlen(command[0]);
-	len += _strlen(ver) + _strlen(msg) + id + 5;
-	error = malloc(sizeof(char) * (len + 1));
+	len--;
+	do {
+		buffer[len] = (num1 % 10) + '0';
+		num1 /= 10;
+		len--;
+	} while (num1 > 0);
 
-	if (!error)
-	{
-		free(ver);
-		return (NULL);
-	}
-	error = _strcat_cd(data, command, msg, error, ver);
-
-	free(ver);
-	return (error);
+	return (buffer);
 }
-/**
- * error_exit_shell - error message for exit
- * @data: data struct
- * @command: command passed
- * Return: error message
- */
-char *error_exit_shell(char **command, store *data)
-{
-	int len;
-	char *error;
-	char *ver;
 
-	ver = _itoa(data->counter);
-	len = _strlen(data->callmemaybe) + _strlen(ver);
-	len += _strlen(command[0]) + _strlen(command[1]) + 23;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
+
+/**
+ * create_error - Writes a custom error message to stderr.
+ * @args: An array of arguments.
+ * @err: The error value.
+ *
+ * Return: The error value.
+ */
+int create_error(char **args, int err)
+{
+	char *error;
+
+	switch (err)
 	{
-		free(ver);
-		return (NULL);
+		case -1:
+			error = error_env(args);
+			break;
+		case 1:
+			error = error_1(args);
+			break;
+		case 2:
+			if (*(args[0]) == 'e')
+				error = error_2_exit(++args);
+			else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
+				error = error_2_syntax(args);
+			else
+				error = error_2_cd(args);
+			break;
+		case 126:
+			error = error_126(args);
+			break;
+		case 127:
+			error = error_127(args);
+			break;
 	}
-	_strcpy(error, data->callmemaybe);
-	_strcat(error, ": ");
-	_strcat(error, ver);
-	_strcat(error, ": ");
-	_strcat(error, command[0]);
-	_strcat(error, ": Illegal number: ");
-	_strcat(error, command[1]);
-	_strcat(error, "\n\0");
+	write(STDERR_FILENO, error, _strlen(error));
 
-	free(ver);
-	return (error);
-}
-/**
- * error_env - error message for env
- * @command: commad passed
- * @data: data sstruct
- * Return: error message
- */
-char *error_env(char **command, store *data)
-{
-	int len;
-	char *error;
-	char *msg;
-	char *ver;
-
-	ver = _itoa(data->counter);
-	msg = ": Unable to add/remove from environment\n";
-	len = _strlen(data->callmemaybe) + _strlen(ver);
-	len += _strlen(command[0]) + _strlen(msg) + 4;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
+	if (error)
 		free(error);
-		free(ver);
-		return (NULL);
-	}
-	_strcpy(error, data->callmemaybe);
-	_strcat(error, ": ");
-	_strcat(error, ver);
-	_strcat(error, ": ");
-	_strcat(error, command[0]);
-	_strcat(error, msg);
-	_strcat(error, "\0");
+	return (err);
 
-	free(ver);
-	return (error);
-}
-/**
- * error_not_found - error message when command is not found
- * @command: command passed
- * @data: struct data
- * Return: error message
- */
-char *error_not_found(char **command, store *data)
-{
-	int len;
-	char *error;
-	char *ver;
-
-	ver = _itoa(data->counter);
-	len = _strlen(data->callmemaybe) + _strlen(ver);
-	len += _strlen(command[0]) + 16;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
-		free(error);
-		free(ver);
-		return (NULL);
-	}
-	_strcpy(error, data->callmemaybe);
-	_strcat(error, ": ");
-	_strcat(error, ver);
-	_strcat(error, ": ");
-	_strcat(error, command[0]);
-	_strcat(error, ": not found\n");
-	_strcat(error, "\0");
-	free(ver);
-	return (error);
 }
