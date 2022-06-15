@@ -294,5 +294,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 **hsh** emulates basic functionality of the **sh** shell. This README borrows form the Linux man pages [sh(1)](https://linux.die.net/man/1/sh) and [dash(1)](https://linux.die.net/man/1/dash).
 
-This project was written as part of the curriculum for ALX School. ALX School is a campus-based software engineering program that prepares students for careers in the tech industry using project-based peer learning. For more information, visit [this link](https://www.holbertonschool.com/).
-
+This project was written as part of the curriculum for ALX School. ALX School is a campus-based software engineering program that prepares students for careers in the tech industry using project-based peer learning. For more information, visit [this link](https://www.holbertonschool.com/)
+finally we finshed our simple_shell task i dunno what to do so im so excited to be on the python course
